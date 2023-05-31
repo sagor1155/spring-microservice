@@ -6,7 +6,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class UserResource {
@@ -24,7 +23,7 @@ public class UserResource {
 
     @GetMapping(value = "/users/{id}")
     public User getUser(@PathVariable Integer id) {
-        User user = userDaoService.findOne(id);
+        User user = userDaoService.findById(id);
 
         if (user == null) {
             throw new UserNotFountException("User not found with Id=" + id);
@@ -41,6 +40,12 @@ public class UserResource {
                 .buildAndExpand(savedUser.getId())
                 .toUri();
         return ResponseEntity.created(location).build();
+    }
+
+    @DeleteMapping(value = "users/{id}")
+    public void deleteUser(@PathVariable Integer id) {
+        userDaoService.deleteById(id);
+
     }
 
 
