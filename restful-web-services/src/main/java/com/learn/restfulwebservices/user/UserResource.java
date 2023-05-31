@@ -24,8 +24,13 @@ public class UserResource {
 
     @GetMapping(value = "/users/{id}")
     public User getUser(@PathVariable Integer id) {
-        Optional<User> user = userDaoService.findOne(id);
-        return user.orElse(null);
+        User user = userDaoService.findOne(id);
+
+        if (user == null) {
+            throw new UserNotFountException("User not found with Id=" + id);
+        }
+
+        return user;
     }
 
     @PostMapping(value = "/users")
@@ -35,7 +40,7 @@ public class UserResource {
                 .path("/{id}")
                 .buildAndExpand(savedUser.getId())
                 .toUri();
-        return ResponseEntity.created(null).build();
+        return ResponseEntity.created(location).build();
     }
 
 
