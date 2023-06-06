@@ -1,15 +1,22 @@
 package com.learn.restfulwebservices.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
 
+//@JsonIgnoreProperties({"user_name", "birth_date"})
 public class User {
     private Integer id;
     @Size(min = 2, message = "Name should be at least 2 character")
+    @JsonProperty("user_name")
     private String name;
     @Past(message = "Birth Date should be in the past")
+    @JsonProperty("birth_date")
+    @JsonIgnore
     private LocalDate birthDate;
 
     public User(Integer id, String name, LocalDate birthDate) {
