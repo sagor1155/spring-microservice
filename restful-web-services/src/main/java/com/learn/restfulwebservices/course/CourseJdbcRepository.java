@@ -26,7 +26,7 @@ public class CourseJdbcRepository {
             select * from course where id = ?;
             """;
 
-    public void insert(Course course) {
+    public void save(Course course) {
         this.springJdbcTemplate.update(INSERT_QUERY,
                 course.getId(), course.getName(), course.getAuthor());
     }

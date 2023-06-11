@@ -7,17 +7,27 @@ import org.springframework.stereotype.Component;
 @Component
 public class CourseJpaCommandLineRunner implements CommandLineRunner {
 
+//    @Autowired
+//    private CourseJdbcRepository repository;
+
+//    @Autowired
+//    private CourseJpaRepository repository;
+
     @Autowired
-    private CourseJpaRepository repository;
+    private CourseSpringDataJpaRepository repository;
+
     @Override
     public void run(String... args) throws Exception {
-        repository.insert(new Course(1, "Spring Jdbc", "Lee Luise"));
-        repository.insert(new Course(2, "Spring Jdbc", "Lee Luise"));
-        repository.insert(new Course(3, "Spring Jdbc", "Lee Luise"));
+        repository.save(new Course(1L, "Spring Jdbc", "Lee Luise"));
+        repository.save(new Course(2L, "Spring Jdbc", "Lee Luise"));
+        repository.save(new Course(3L, "Spring Jdbc", "Lee Luise"));
 
-        repository.deleteById(2);
+        repository.deleteById(2L);
 
-        System.out.println(repository.findById(1));
-        System.out.println(repository.findById(3));
+        System.out.println(repository.findById(1L));
+        System.out.println(repository.findById(3L));
+
+        System.out.println(repository.findByAuthor("Lee Luise"));
+
     }
 }

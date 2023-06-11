@@ -12,7 +12,7 @@ public class CourseJpaRepository {
     @PersistenceContext // or you can use `@Autowired`
     private EntityManager entityManager;
 
-    public void insert(Course course) {
+    public void save(Course course) {
         entityManager.merge(course);
     }
 
