@@ -5,6 +5,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -46,7 +47,7 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
                                                                WebRequest request) {
         ErrorDetails errorDetails = new ErrorDetails(
                 LocalDateTime.now(),
-                ex.getFieldErrors().stream().map(fe -> fe.getDefaultMessage()).toList().toString(),
+                ex.getFieldErrors().stream().map(FieldError::getDefaultMessage).toList().toString(),
                 request.getDescription(false)
         );
 
