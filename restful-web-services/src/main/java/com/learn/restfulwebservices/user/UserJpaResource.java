@@ -1,5 +1,6 @@
 package com.learn.restfulwebservices.user;
 
+import com.learn.restfulwebservices.post.Post;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -49,5 +50,14 @@ public class UserJpaResource {
         userJpaRepository.deleteById(id);
     }
 
+    @GetMapping(value = "/api/users/{id}/posts")
+    public List<Post> getPosts(@PathVariable Integer id) {
+        Optional<User> user = userJpaRepository.findById(id);
 
+        if (user.isEmpty()) {
+            throw new UserNotFountException("User not found with Id=" + id);
+        }
+
+        return user.get().getPosts();
+    }
 }
