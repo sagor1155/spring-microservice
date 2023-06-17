@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example.microservices</groupId>
-	<artifactId>currency-exchange</artifactId>
+	<artifactId>currency-exchange-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>currency-exchange</name>
 	<description>Demo project for Spring Cloud Microservices</description>

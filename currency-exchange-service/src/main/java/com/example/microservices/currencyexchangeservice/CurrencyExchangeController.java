@@ -1,4 +1,4 @@
-package com.example.microservices.currencyexchange;
+package com.example.microservices.currencyexchangeservice;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;

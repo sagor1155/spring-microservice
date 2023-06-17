@@ -1,4 +1,4 @@
-package com.example.microservices.currencyexchange;
+package com.example.microservices.currencyexchangeservice;
 
 import java.math.BigDecimal;
 
@@ -8,6 +8,13 @@ public class CurrencyExchange {
     private String from;
     private String to;
     private BigDecimal conversionMultiple;
+
+    /**
+     * USE CASE:
+     * Used when multiple instances are running on different port
+     * Assign port for a particular instance of 'currency-exchange' microservice
+     * Receiver will know which microservice instance is returning the response
+     * */
     private String environment;
 
     public CurrencyExchange() {

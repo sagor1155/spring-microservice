@@ -1,13 +1,13 @@
-package com.example.microservices.currencyexchange;
+package com.example.microservices.currencyexchangeservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CurrencyExchangeApplication {
+public class CurrencyExchangeServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CurrencyExchangeApplication.class, args);
+		SpringApplication.run(CurrencyExchangeServiceApplication.class, args);
 	}
 
 }
