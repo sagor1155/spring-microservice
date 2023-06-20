@@ -1,42 +1,27 @@
-package com.example.microservices.currencyexchangeservice;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+package com.example.microservices.currencyconversionservice;
 
 import java.math.BigDecimal;
 
-@Entity
-public class CurrencyExchange {
-
-    @Id
+public class CurrencyConversion {
     private Long id;
-
-    @Column(name = "currency_from")
     private String from;
-
-    @Column(name = "currency_to")
     private String to;
-
-    @Column(name = "conversion_multiple")
     private BigDecimal conversionMultiple;
-
-    /**
-     * USE CASE:
-     * Used when multiple instances are running on different port
-     * Assign port for a particular instance of 'currency-exchange' microservice
-     * Receiver will know which microservice instance is returning the response
-     * */
+    private BigDecimal quantity;
+    private BigDecimal totalCalculatedAmount;
     private String environment;
 
-    public CurrencyExchange() {
+    public CurrencyConversion() {
     }
 
-    public CurrencyExchange(Long id, String from, String to, BigDecimal conversionMultiple) {
+    public CurrencyConversion(Long id, String from, String to, BigDecimal conversionMultiple, BigDecimal quantity, BigDecimal totalCalculatedAmount, String environment) {
         this.id = id;
         this.from = from;
         this.to = to;
         this.conversionMultiple = conversionMultiple;
+        this.quantity = quantity;
+        this.totalCalculatedAmount = totalCalculatedAmount;
+        this.environment = environment;
     }
 
     public Long getId() {
@@ -71,6 +56,22 @@ public class CurrencyExchange {
         this.conversionMultiple = conversionMultiple;
     }
 
+    public BigDecimal getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(BigDecimal quantity) {
+        this.quantity = quantity;
+    }
+
+    public BigDecimal getTotalCalculatedAmount() {
+        return totalCalculatedAmount;
+    }
+
+    public void setTotalCalculatedAmount(BigDecimal totalCalculatedAmount) {
+        this.totalCalculatedAmount = totalCalculatedAmount;
+    }
+
     public String getEnvironment() {
         return environment;
     }
@@ -81,11 +82,14 @@ public class CurrencyExchange {
 
     @Override
     public String toString() {
-        return "CurrencyExchange{" +
+        return "CurrencyConversion{" +
                 "id=" + id +
                 ", from='" + from + '\'' +
                 ", to='" + to + '\'' +
                 ", conversionMultiple=" + conversionMultiple +
+                ", quantity=" + quantity +
+                ", totalCalculatedAmount=" + totalCalculatedAmount +
+                ", environment='" + environment + '\'' +
                 '}';
     }
 }
