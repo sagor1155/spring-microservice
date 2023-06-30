@@ -1,6 +1,7 @@
 package com.example.microservices.currencyconversionservice;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,7 +15,10 @@ import java.util.HashMap;
 public class CurrencyConversionController {
 
     @Autowired
-    RestTemplate restTemplate;
+    private RestTemplate restTemplate;
+
+    @Value("${app.currency-exchange-server}")
+    private String currencyExchangeUrl;
 
     @Autowired
     private CurrencyExchangeProxy proxy;
@@ -30,7 +34,7 @@ public class CurrencyConversionController {
         uriVariable.put("from", from);
         uriVariable.put("to", to);
         ResponseEntity<CurrencyConversion> responseEntity = restTemplate.getForEntity(
-                "http://localhost:8000/currency-exchange/from/{from}/to/{to}",
+                currencyExchangeUrl + "/currency-exchange/from/{from}/to/{to}",
                 CurrencyConversion.class, uriVariable
         );
 

@@ -1,10 +1,36 @@
 version: '2.18.1'
 
 services:
+
   currency-exchange:
     image: currency-exchange-service:latest
     ports:
       - "8000:8000"
+    networks:
+      - currency-network
+    depends_on:
+      - naming-server
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
+      MANAGEMENT.ZIPKIN.TRACING.ENDPOINT: http://zipkin-server:9411/api/v2/spans
+
+  currency-conversion:
+    image: currency-conversion-service:latest
+    ports:
+      - "8100:8100"
+    networks:
+      - currency-network
+    depends_on:
+      - naming-server
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
+      MANAGEMENT.ZIPKIN.TRACING.ENDPOINT: http://zipkin-server:9411/api/v2/spans
+      APP.CURRENCY-EXCHANGE-SERVER: http://currency-exchange:8000
+
+  api-gateway:
+    image: api-gateway:latest
+    ports:
+      - "8765:8765"
     networks:
       - currency-network
     depends_on:
